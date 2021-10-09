@@ -1,20 +1,31 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:gmap/pages/signup.dart';
+import 'package:gmap/screens/search.dart';
+import 'package:provider/provider.dart';
+
+import 'services/geolocator_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final locatorService = GeoLocatorService();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PeterParker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    // ignore: missing_required_param
+    return FutureProvider<Position>(
+      create: (context) => locatorService.getLocation(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'PeterParker',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const SignUp(),
       ),
-      home: const SignUp(),
     );
   }
 }
