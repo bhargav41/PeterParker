@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gmap/models/place.dart';
+import 'package:gmap/pages/signup.dart';
 import 'package:gmap/screens/search.dart';
 import 'package:gmap/services/places_service.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Search(),
+        home: const SignUp(),
       ),
     );
   }
