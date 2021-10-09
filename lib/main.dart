@@ -1,6 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:gmap/pages/signup.dart';
 import 'package:gmap/screens/search.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   final locatorService = GeoLocatorService();
   @override
   Widget build(BuildContext context) {
+    // ignore: missing_required_param
     return FutureProvider<Position>(
       create: (context) => locatorService.getLocation(),
       child: MaterialApp(
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Search(),
+        home: const SignUp(),
       ),
     );
   }
