@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gmap/Methods/Methods.dart';
 import 'package:gmap/screens/login.dart';
+import 'package:gmap/screens/search.dart';
 import 'package:gmap/screens/signup.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,6 +14,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _passwordVisible = false;
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +63,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
+                      controller: _email,
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail),
                           labelText: 'Email',
@@ -71,6 +77,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
+                      controller: _password,
                       obscureText:
                           !_passwordVisible, //This will obscure text dynamically
                       decoration: InputDecoration(
@@ -108,8 +115,54 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(250, 0, 20, 0),
                     child: FloatingActionButton.extended(
-                      onPressed: () {
-                        _launchURL();
+                      onPressed: () async {
+                        if (_email.text.isNotEmpty &&
+                            _password.text.isNotEmpty) {
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          // await user!.reload();
+                          bool emailIsVerified = await isEmailVerified();
+                          // setState(() {});
+                          if (emailIsVerified == true) {
+                            logIn(_email.text, _password.text).then((user) {
+                              if (user != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Login Sucessful'),
+                                  ),
+                                );
+                                print("Login Sucessfull");
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Search()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Login Failed'),
+                                  ),
+                                );
+                                print("Login Failed");
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              }
+                            });
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please fill form Correctly'),
+                              ),
+                            );
+                            print("Please fill form correctly");
+                          }
+                        }
                       },
                       icon: const Icon(
                         Icons.forward,
@@ -171,14 +224,5 @@ class _LoginState extends State<Login> {
             ),
           ],
         )));
-  }
-}
-
-_launchURL() async {
-  const url = 'https://morning-dawn-34867.herokuapp.com/login';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }

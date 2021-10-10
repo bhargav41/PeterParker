@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gmap/Methods/Methods.dart';
 import 'package:gmap/screens/login.dart';
+import 'package:gmap/screens/search.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -10,6 +12,9 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool _passwordVisible = false;
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,7 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
+                      controller: _email,
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail),
                           labelText: 'Email',
@@ -69,6 +75,7 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
+                      controller: _password,
                       obscureText:
                           !_passwordVisible, //This will obscure text dynamically
                       decoration: InputDecoration(
@@ -106,8 +113,53 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(250, 0, 20, 0),
                     child: FloatingActionButton.extended(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/');
+                      onPressed: () async {
+                        print(_email.text.isNotEmpty);
+                        print(_password.text.isNotEmpty);
+                        if (_email.text.isNotEmpty &&
+                            _password.text.isNotEmpty) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          createAccount(_email.text, _password.text)
+                              .then((user) {
+                            if (user != null) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              verifyEmail();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('Verification Email Has been sent '),
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Search()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Singup Failed'),
+                                ),
+                              );
+                              print("Singup Failed");
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Please Provide the required details'),
+                            ),
+                          );
+                          print('Please provide the required details');
+                        }
                       },
                       icon: const Icon(
                         Icons.forward,
