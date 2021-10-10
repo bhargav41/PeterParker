@@ -1,0 +1,17 @@
+{
+  "name": "peterparker",
+  "version": "0.0.0",
+  "description": "verify a JWT signed with RS256",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Auth0",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-openid-connect": "^2.5.1"
+  }
+}
