@@ -15,94 +15,64 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> list = [
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "Car Parking",
+        "rating": 3.5,
+        "distance": "1 km",
+        "vicinity": "HGMG+HXX"
       },
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "Market Parking Lot",
+        "rating": 4.5,
+        "distance": "1.32 km",
+        "vicinity": "9-12, 2nd Avenue"
       },
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "CK Market Parking",
+        "rating": 4.2,
+        "distance": "1.5 km",
+        "vicinity": "CK-102"
       },
       {
-        "title": "Thana Road",
+        "title": "Sourav Abasan Parking lot",
         "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "distance": "2 km",
+        "vicinity": "EE 209"
       },
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "Thana Road Car Parking",
+        "rating": 3.2,
+        "distance": "2.1 km",
+        "vicinity": "Andal More"
       },
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "HighLea Car Park lot",
+        "rating": 4.5,
+        "distance": "5 km",
+        "vicinity": "South Bazar, Andal"
       },
       {
-        "title": "Thana Road",
+        "title": "Dolly Parking Area",
         "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "distance": "5.5 km",
+        "vicinity": "North Bazar, Andal"
       },
       {
-        "title": "Thana Road",
+        "title": "Parking Garage",
         "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "distance": "5.9 km",
+        "vicinity": "B-L-60"
       },
       {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "title": "Sen Parking Space",
+        "rating": 4.5,
+        "distance": "10 km",
+        "vicinity": "Durgapur, City Center"
       },
       {
-        "title": "Thana Road",
+        "title": "Royal Parking",
         "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
-      },
-      {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
-      },
-      {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
-      },
-      {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
-      },
-      {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
-      },
-      {
-        "title": "Thana Road",
-        "rating": 5.00,
-        "distance": "10km",
-        "vicinity": "Dehradun"
+        "distance": "23 km",
+        "vicinity": "Kolkata, West Bengal"
       },
     ];
     final currentPosition = Provider.of<Position>(context);
