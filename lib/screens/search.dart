@@ -13,9 +13,100 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> list = [
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+      {
+        "title": "Thana Road",
+        "rating": 5.00,
+        "distance": "10km",
+        "vicinity": "Dehradun"
+      },
+    ];
     final currentPosition = Provider.of<Position>(context);
     final placesProvider = Provider.of<Future<List<Place>>>(context);
-    final geoService = GeoLocatorService();
     final markerService = MarkerService();
     return FutureProvider(
       initialData: null,
@@ -56,80 +147,130 @@ class Search extends StatelessWidget {
                             SizedBox(
                               height: 16.0,
                             ),
+                            // Expanded(
+                            //   child: ListView.builder(
+                            //       itemCount: places.length,
+                            //       itemBuilder: (context, index) {
+                            //         return FutureProvider(
+                            //           initialData: null,
+                            //           create: (context) =>
+                            //               geoService.getDistance(
+                            //                   currentPosition.latitude,
+                            //                   currentPosition.longitude,
+                            //                   places[index]
+                            //                       .geometry
+                            //                       .location
+                            //                       .lat,
+                            //                   places[index]
+                            //                       .geometry
+                            //                       .location
+                            //                       .lng),
+                            //           child: Card(
+                            //             child: ListTile(
+                            //               title: Text(places[index].name),
+                            //               subtitle: Column(
+                            //                 crossAxisAlignment:
+                            //                     CrossAxisAlignment.start,
+                            //                 children: [
+                            //                   SizedBox(height: 3.0),
+                            //                   (places[index].rating != null)
+                            //                       ? Row(
+                            //                           children: [
+                            //                             RatingBarIndicator(
+                            //                               rating: places[index]
+                            //                                   .rating,
+                            //                               itemBuilder: (context,
+                            //                                       index) =>
+                            //                                   Icon(Icons.star,
+                            //                                       color: Colors
+                            //                                           .amber),
+                            //                               itemCount: 5,
+                            //                               itemSize: 10.0,
+                            //                               direction:
+                            //                                   Axis.horizontal,
+                            //                             ),
+                            //                           ],
+                            //                         )
+                            //                       : Row(),
+                            //                   SizedBox(
+                            //                     height: 5.0,
+                            //                   ),
+                            //                   Consumer<double>(
+                            //                     builder:
+                            //                         (context, meters, widget) {
+                            //                       return (meters != null)
+                            //                           ? Text(
+                            //                               '${places[index].vicinity} \u00b7 ${(meters / 1000).round()} km')
+                            //                           : Container();
+                            //                     },
+                            //                   ),
+                            //                 ],
+                            //               ),
+                            //               trailing: IconButton(
+                            //                 icon: Icon(Icons.directions),
+                            //                 onPressed: () {
+                            //                   _launchMapUrl(
+                            //                       places[index]
+                            //                           .geometry
+                            //                           .location
+                            //                           .lat,
+                            //                       places[index]
+                            //                           .geometry
+                            //                           .location
+                            //                           .lng);
+                            //                 },
+                            //                 color: Colors.green,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         );
+                            //       }),
+                            // )
+
                             Expanded(
                               child: ListView.builder(
-                                  itemCount: places.length,
+                                  itemCount: list.length,
                                   itemBuilder: (context, index) {
-                                    return FutureProvider(
-                                      initialData: null,
-                                      create: (context) =>
-                                          geoService.getDistance(
-                                              currentPosition.latitude,
-                                              currentPosition.longitude,
-                                              places[index]
-                                                  .geometry
-                                                  .location
-                                                  .lat,
-                                              places[index]
-                                                  .geometry
-                                                  .location
-                                                  .lng),
-                                      child: Card(
-                                        child: ListTile(
-                                          title: Text(places[index].name),
-                                          subtitle: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(height: 3.0),
-                                              (places[index].rating != null)
-                                                  ? Row(
-                                                      children: [
-                                                        RatingBarIndicator(
-                                                          rating: places[index]
-                                                              .rating,
-                                                          itemBuilder: (context,
-                                                                  index) =>
-                                                              Icon(Icons.star,
-                                                                  color: Colors
-                                                                      .amber),
-                                                          itemCount: 5,
-                                                          itemSize: 10.0,
-                                                          direction:
-                                                              Axis.horizontal,
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Row(),
-                                              SizedBox(
-                                                height: 5.0,
-                                              ),
-                                              Consumer<double>(
-                                                builder:
-                                                    (context, meters, widget) {
-                                                  return (meters != null)
-                                                      ? Text(
-                                                          '${places[index].vicinity} \u00b7 ${(meters / 1000).round()} km')
-                                                      : Container();
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          trailing: IconButton(
-                                            icon: Icon(Icons.directions),
-                                            onPressed: () {
-                                              _launchMapUrl(
-                                                  places[index]
-                                                      .geometry
-                                                      .location
-                                                      .lat,
-                                                  places[index]
-                                                      .geometry
-                                                      .location
-                                                      .lng);
-                                            },
-                                            color: Colors.green,
-                                          ),
+                                    return Card(
+                                      child: ListTile(
+                                        title: Text("${list[index]['title']}"),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 3.0),
+                                            (list[index]['rating'] != null)
+                                                ? Row(
+                                                    children: [
+                                                      RatingBarIndicator(
+                                                        rating: list[index]
+                                                            ['rating'],
+                                                        itemBuilder: (context,
+                                                                index) =>
+                                                            Icon(Icons.star,
+                                                                color: Colors
+                                                                    .amber),
+                                                        itemCount: 5,
+                                                        itemSize: 10.0,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Row(),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Text(
+                                                '${list[index]['vicinity']} \u00b7 ${list[index]['distance']}')
+                                          ],
+                                        ),
+                                        trailing: IconButton(
+                                          icon: Icon(Icons.directions),
+                                          onPressed: () {
+                                            _launchMapUrl(23.5012, 88.4917);
+                                          },
+                                          color: Colors.green,
                                         ),
                                       ),
                                     );
@@ -151,10 +292,6 @@ class Search extends StatelessWidget {
 
   void _launchMapUrl(double lat, double lng) async {
     final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    await launch(url);
   }
 }
