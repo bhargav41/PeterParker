@@ -2,23 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gmap/models/place.dart';
+import 'package:gmap/pages/signup.dart';
 import 'package:gmap/services/marker_service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:gmap/services/geolocator_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
 
   @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> list = [
+    List<Map<dynamic, dynamic>> list = [
       {
         "title": "Car Parking",
         "rating": 3.5,
         "distance": "1 km",
-        "vicinity": "HGMG+HXX"
+        "vicinity": "HGMG+HXX",
       },
       {
         "title": "Market Parking Lot",
@@ -75,6 +81,87 @@ class Search extends StatelessWidget {
         "vicinity": "Kolkata, West Bengal"
       },
     ];
+
+    Set<Marker> _markers = {};
+
+    void _onMapCreated(GoogleMapController controller) {
+      setState(() {
+        _markers.add(
+          const Marker(
+            markerId: MarkerId('id-1'),
+            position: LatLng(23.402039, 87.547729),
+            // icon: mapMarker,
+          ),
+        );
+      });
+    }
+
+    List<Marker> locationMarkers = [
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      ),
+      const Marker(
+        markerId: MarkerId("Car Parking"),
+        draggable: false,
+        // icon: Icon(Icons.local_parking),
+        infoWindow: InfoWindow(title: "Car Parking", snippet: "HGMG+HXX"),
+        position: LatLng(23.002, 27.345),
+      )
+    ];
+
     final currentPosition = Provider.of<Position>(context);
     final placesProvider = Provider.of<Future<List<Place>>>(context);
     final markerService = MarkerService();
@@ -89,7 +176,9 @@ class Search extends StatelessWidget {
           backgroundColor: Colors.green,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                MaterialPageRoute(builder: (context) => const SignUp());
+              },
               icon: Icon(Icons.logout),
             ),
           ],
@@ -106,7 +195,8 @@ class Search extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 3,
                               width: MediaQuery.of(context).size.width,
                               child: GoogleMap(
-                                markers: Set<Marker>.of(markers),
+                                onMapCreated: _onMapCreated,
+                                markers: _markers,
                                 initialCameraPosition: CameraPosition(
                                     target: LatLng(currentPosition.latitude,
                                         currentPosition.longitude),
