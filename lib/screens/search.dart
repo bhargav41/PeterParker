@@ -177,7 +177,11 @@ class _SearchState extends State<Search> {
           actions: [
             IconButton(
               onPressed: () {
-                MaterialPageRoute(builder: (context) => const SignUp());
+               Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignUp()),
+                                );
               },
               icon: Icon(Icons.logout),
             ),
