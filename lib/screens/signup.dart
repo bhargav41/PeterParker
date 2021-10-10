@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gmap/pages/login.dart';
-import 'package:gmap/pages/signup.dart';
+import 'package:gmap/screens/login.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   bool _passwordVisible = false;
 
   @override
@@ -48,8 +47,8 @@ class _LoginState extends State<Login> {
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
-                    child: Text('Login',
+                    padding: EdgeInsets.fromLTRB(25, 24, 0, 0),
+                    child: Text('Create Account',
                         style: TextStyle(
                             fontSize: 35, fontWeight: FontWeight.bold)),
                   ),
@@ -115,24 +114,24 @@ class _LoginState extends State<Login> {
                         size: 20,
                       ),
                       label:
-                          const Text("Login", style: TextStyle(fontSize: 15)),
+                          const Text("Signup", style: TextStyle(fontSize: 15)),
                       backgroundColor: Colors.green[600],
                     ),
                   ),
                   const SizedBox(
-                    height: 45,
+                    height: 60,
                   ),
                   Container(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                       child: Row(
                         children: [
-                          const Text('Dont Have an account?',
+                          const Text('Already Have an account?',
                               style: TextStyle(
                                 letterSpacing: 2,
                               )),
                           TextButton(
-                              child: const Text('SingUp',
+                              child: const Text('Login',
                                   style: TextStyle(
                                       letterSpacing: 2,
                                       fontSize: 20,
@@ -142,7 +141,7 @@ class _LoginState extends State<Login> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const SignUp()),
+                                      builder: (context) => const Login()),
                                 );
                               }),
                         ],
@@ -153,7 +152,7 @@ class _LoginState extends State<Login> {
                     children: [
                       Container(
                         width: size.width * 0.95,
-                        height: size.width * 0.59,
+                        height: size.width * 0.39,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: const AssetImage("assets/bottomnew.png"),
