@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gmap/models/place.dart';
-import 'package:gmap/pages/signup.dart';
+import 'package:gmap/screens/signup.dart';
 import 'package:gmap/services/marker_service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -177,11 +177,10 @@ class _SearchState extends State<Search> {
           actions: [
             IconButton(
               onPressed: () {
-               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const SignUp()),
-                                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUp()),
+                );
               },
               icon: Icon(Icons.logout),
             ),

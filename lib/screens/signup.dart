@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gmap/screens/login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,15 +13,17 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 25, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
               child: Container(
-                  width: 400,
-                  height: 100,
+                  // width: size.width * 0.2,
+                  height: size.height * 0.15,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: const AssetImage("assets/topnew.png"),
@@ -35,16 +38,16 @@ class _SignUpState extends State<SignUp> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/');
                         }),
-                    const SizedBox(
-                      width: 200,
-                    ),
+                    // const SizedBox(
+                    //   width: 20,
+                    // ),
                   ])),
             ),
-            Flexible(
-              child: ListView(
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.fromLTRB(25, 50, 0, 0),
+                    padding: EdgeInsets.fromLTRB(25, 24, 0, 0),
                     child: Text('Create Account',
                         style: TextStyle(
                             fontSize: 35, fontWeight: FontWeight.bold)),
@@ -66,8 +69,6 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
-                      // keyboardType: TextInputType.text,
-
                       obscureText:
                           !_passwordVisible, //This will obscure text dynamically
                       decoration: InputDecoration(
@@ -137,7 +138,11 @@ class _SignUpState extends State<SignUp> {
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black)),
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, '/');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Login()),
+                                );
                               }),
                         ],
                       ),
@@ -146,8 +151,8 @@ class _SignUpState extends State<SignUp> {
                   Row(
                     children: [
                       Container(
-                        width: 400,
-                        height: 95,
+                        width: size.width * 0.95,
+                        height: size.width * 0.39,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: const AssetImage("assets/bottomnew.png"),
@@ -163,6 +168,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ],
-        ));
+        )));
   }
 }
