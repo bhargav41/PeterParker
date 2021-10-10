@@ -21,6 +21,18 @@ class Search extends StatelessWidget {
       initialData: null,
       create: (context) => placesProvider,
       child: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text("Peter Parker"),
+          ),
+          backgroundColor: Colors.green,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.logout),
+            ),
+          ],
+        ),
         body: (currentPosition != null)
             ? Consumer<List<Place>>(
                 builder: (_, places, __) {
