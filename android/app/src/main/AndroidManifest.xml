@@ -42,5 +42,8 @@
             <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyBX7CYYCcjTo6LZswFolA4_sQii2RWKDSQ"/>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+  <!-- Include only if your app benefits from precise location access. -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>

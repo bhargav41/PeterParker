@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gmap/screens/search.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -137,7 +138,13 @@ class _SignUpState extends State<SignUp> {
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black)),
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, '/');
+                                Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        const Search(),
+                                  ),
+                                );
                               }),
                         ],
                       ),
