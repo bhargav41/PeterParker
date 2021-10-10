@@ -1,15 +1,21 @@
 // @dart=2.9
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gmap/models/place.dart';
-import 'package:gmap/pages/signup.dart';
+import 'package:gmap/screens/login.dart';
+import 'package:gmap/screens/signup.dart';
 import 'package:gmap/screens/search.dart';
+import 'package:gmap/screens/splash.dart';
 import 'package:gmap/services/places_service.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'services/geolocator_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -22,10 +28,19 @@ class MyApp extends StatelessWidget {
       providers: [
         FutureProvider<Position>(
             create: (context) => locatorService.getLocation()),
-        ProxyProvider<Position, Future<List<Place>>>(
-          update: (context, position, places) {
+        FutureProvider(
+          create: (context) {
+            ImageConfiguration configuration =
+                createLocalImageConfiguration(context);
+            return BitmapDescriptor.fromAssetImage(
+                configuration, 'assets/parking-icon.png');
+          },
+        ),
+        ProxyProvider2<Position, BitmapDescriptor, Future<List<Place>>>(
+          update: (context, position, icon, places) {
             return (position != null)
-                ? placesService.getPlaces(position.latitude, position.longitude)
+                ? placesService.getPlaces(
+                    position.latitude, position.longitude, icon)
                 : null;
           },
         )
@@ -36,7 +51,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SignUp(),
+        home: Splash(),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'geometry.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -17,7 +19,7 @@ class Place {
       required this.vicinity,
       required this.icon});
 
-  Place.fromJson(Map<dynamic, dynamic> parsedJson)
+  Place.fromJson(Map<dynamic, dynamic> parsedJson, BitmapDescriptor icon)
       : name = parsedJson['name'],
         rating = (parsedJson['rating'] != null)
             ? parsedJson['rating'].toDouble()

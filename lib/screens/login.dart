@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:gmap/Methods/Methods.dart';
+import 'package:gmap/screens/login.dart';
 import 'package:gmap/screens/search.dart';
+import 'package:gmap/screens/signup.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _LoginState createState() => _LoginState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginState extends State<Login> {
   bool _passwordVisible = false;
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 25, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
               child: Container(
-                  width: 400,
-                  height: 100,
+                  // width: size.width * 0.2,
+                  height: size.height * 0.15,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: const AssetImage("assets/topnew.png"),
@@ -36,17 +45,17 @@ class _SignUpState extends State<SignUp> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/');
                         }),
-                    const SizedBox(
-                      width: 200,
-                    ),
+                    // const SizedBox(
+                    //   width: 20,
+                    // ),
                   ])),
             ),
-            Flexible(
-              child: ListView(
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.fromLTRB(25, 50, 0, 0),
-                    child: Text('Create Account',
+                    padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
+                    child: Text('Login',
                         style: TextStyle(
                             fontSize: 35, fontWeight: FontWeight.bold)),
                   ),
@@ -54,6 +63,7 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
+                      controller: _email,
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail),
                           labelText: 'Email',
@@ -67,8 +77,7 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: TextFormField(
-                      // keyboardType: TextInputType.text,
-
+                      controller: _password,
                       obscureText:
                           !_passwordVisible, //This will obscure text dynamically
                       decoration: InputDecoration(
@@ -107,43 +116,87 @@ class _SignUpState extends State<SignUp> {
                     padding: const EdgeInsets.fromLTRB(250, 0, 20, 0),
                     child: FloatingActionButton.extended(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/');
+                        // if (_email.text.isNotEmpty &&
+                        //     _password.text.isNotEmpty) {
+                        //   setState(() {
+                        //     isLoading = true;
+                        //   });
+
+                        //   // await user!.reload();
+                        //   bool emailIsVerified = await isEmailVerified();
+                        //   // setState(() {});
+                        //   if (emailIsVerified == true) {
+                        //     logIn(_email.text, _password.text).then((user) {
+                        //       if (user != null) {
+                        //         ScaffoldMessenger.of(context).showSnackBar(
+                        //           const SnackBar(
+                        //             content: Text('Login Sucessful'),
+                        //           ),
+                        //         );
+                        //         print("Login Sucessfull");
+                        //         setState(() {
+                        //           isLoading = false;
+                        //         });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Search()),
+                        );
+                        //       } else {
+                        //         ScaffoldMessenger.of(context).showSnackBar(
+                        //           const SnackBar(
+                        //             content: Text('Login Failed'),
+                        //           ),
+                        //         );
+                        //         print("Login Failed");
+                        //         setState(() {
+                        //           isLoading = false;
+                        //         });
+                        //       }
+                        //     });
+                        //   } else {
+                        //     ScaffoldMessenger.of(context).showSnackBar(
+                        //       const SnackBar(
+                        //         content: Text('Please fill form Correctly'),
+                        //       ),
+                        //     );
+                        //     print("Please fill form correctly");
+                        //   }
+                        // }
                       },
                       icon: const Icon(
                         Icons.forward,
                         size: 20,
                       ),
                       label:
-                          const Text("Signup", style: TextStyle(fontSize: 15)),
+                          const Text("Login", style: TextStyle(fontSize: 15)),
                       backgroundColor: Colors.green[600],
                     ),
                   ),
                   const SizedBox(
-                    height: 60,
+                    height: 45,
                   ),
                   Container(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                       child: Row(
                         children: [
-                          const Text('Already Have an account?',
+                          const Text('Dont Have an account?',
                               style: TextStyle(
                                 letterSpacing: 2,
                               )),
                           TextButton(
-                              child: const Text('Login',
+                              child: const Text('SignUp',
                                   style: TextStyle(
                                       letterSpacing: 2,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black)),
                               onPressed: () {
-                                Navigator.push<void>(
+                                Navigator.push(
                                   context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        const Search(),
-                                  ),
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignUp()),
                                 );
                               }),
                         ],
@@ -153,8 +206,8 @@ class _SignUpState extends State<SignUp> {
                   Row(
                     children: [
                       Container(
-                        width: 400,
-                        height: 95,
+                        width: size.width * 0.95,
+                        height: size.width * 0.59,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: const AssetImage("assets/bottomnew.png"),
@@ -170,6 +223,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ],
-        ));
+        )));
   }
 }
